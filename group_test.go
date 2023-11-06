@@ -19,6 +19,11 @@ func (gs *Goods) GetInfo(id int) string {
 	return "goodsInfo"
 }
 
+func (gs *Goods) GetList(page, pageSize int) string {
+	log.Printf("goods.GetList page: %d pageSize: %d", page, pageSize)
+	return "GetList"
+}
+
 func TestGroup(t *testing.T) {
 	gg := NewGroup(5)
 	gg.AddFunc(&FuncEntity{
@@ -72,6 +77,11 @@ func TestGroup(t *testing.T) {
 		Obj:   &Goods{},
 		Name:  "GetInfo",
 		Param: []reflect.Value{reflect.ValueOf(1)},
+	})
+	gg.AddFunc(&FuncEntity{
+		Obj:   &Goods{},
+		Name:  "GetList",
+		Param: []reflect.Value{reflect.ValueOf(1), reflect.ValueOf(10)},
 	})
 	gg.Run()
 }
